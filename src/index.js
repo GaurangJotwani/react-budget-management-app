@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 
 import AppRouter from "./routers/AppRouters";
 import configureStore from "./store/configureStore";
-import { addExpense } from "./actions/expenses";
 
 const store = configureStore();
 
