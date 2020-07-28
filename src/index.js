@@ -9,6 +9,9 @@ import { Provider } from "react-redux";
 
 import AppRouter from "./routers/AppRouters";
 import configureStore from "./store/configureStore";
+import "./firebase/firebase";
+
+console.log(process.env.NODE_ENV);
 
 const store = configureStore();
 

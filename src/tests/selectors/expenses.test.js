@@ -2,6 +2,8 @@ import selectExpenses from "../../selectors/expenses";
 import moment from "moment";
 import expenses from "../fixtures/expenses";
 
+console.log(process.env.REACT_APP_apiKey);
+
 test("should filter by text value", () => {
   const filters = {
     text: "e",
