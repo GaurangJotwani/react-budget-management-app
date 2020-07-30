@@ -13,7 +13,7 @@ beforeEach(() => {
   match = { params: { id: "1" } };
   wrapper = shallow(
     <EditExpensePage
-      removeExpense={removeExpense}
+      startRemoveExpense={removeExpense}
       editExpense={editExpense}
       history={history}
       match={match}
