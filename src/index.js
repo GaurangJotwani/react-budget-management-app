@@ -6,6 +6,7 @@ import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
 
 import { Provider } from "react-redux";
+import { startSetExpenses } from "./actions/expenses";
 
 import AppRouter from "./routers/AppRouters";
 import configureStore from "./store/configureStore";
@@ -21,4 +22,8 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById("root"));
+ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById("root"));
+});
