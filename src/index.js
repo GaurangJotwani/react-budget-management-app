@@ -7,12 +7,12 @@ import "react-dates/initialize";
 
 import { Provider } from "react-redux";
 import { startSetExpenses } from "./actions/expenses";
+import { login, logout } from "./actions/auth";
 
-import AppRouter from "./routers/AppRouters";
+import AppRouter, { history } from "./routers/AppRouters";
 import configureStore from "./store/configureStore";
 import "./firebase/firebase";
-
-console.log(process.env.NODE_ENV);
+import { firebase } from "./firebase/firebase";
 
 const store = configureStore();
 
@@ -22,8 +22,29 @@ const jsx = (
   </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, document.getElementById("root"));
+    hasRendered = true;
+  }
+};
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById("root"));
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch(login(user.uid));
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
+      if (history.location.pathname === "/") {
+        history.push("/dashboard");
+      }
+    });
+  } else {
+    store.dispatch(logout());
+    renderApp();
+    history.push("/");
+    // history.push("/");
+  }
 });
