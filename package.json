@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "core-js": "3.6.4",
     "firebase": "^7.17.1",
     "history": "4.7.2",
     "moment": "^2.27.0",
