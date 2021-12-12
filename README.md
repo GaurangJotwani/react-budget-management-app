@@ -1,68 +1,163 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Budget App
 
-## Available Scripts
+This is a Learning Project.
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+* Integration with Firebase:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  * Authentication with Google account
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  * User based security to control data access on a per-user basis
 
-### `yarn test`
+* Manage expenses with basic functionalities:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  * Create, remove and edit expense
 
-### `yarn build`
+  * Search existing expenses
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  * Display expenses by date or amount
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  * Filter expenses by a time span
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Responsive web design
 
-### `yarn eject`
+### Custom Enhancements
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Authentication with Facebook account
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Better user experience:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  * Render skeleton-ish screen while loading data
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  * Confirmation modal when removing expense
 
-## Learn More
+  * Show username and greeting
+  
+  * Display number of hidden expenses while searching or filtering expenses
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  * Custom NotFound page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Enhancements to be made
 
-### Code Splitting
+* Error handling for authenticatoin
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+* Customize react-dates' date picker for better UI on mobile
 
-### Analyzing the Bundle Size
+* Link multiple auth providers to an account
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Custom Configurations
 
-### Making a Progressive Web App
+* Code splitting to optimize load time at second visit
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+* Add hashes to filenames for cache-busting
 
-### Advanced Configuration
+## Getting Started
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+> The data concerning Firebase configuration have been hidden deliberately, so the app cannot be run with its features on your local machine. If you would like to run it locally, please create your own Firebase project following the official [setup guide](https://firebase.google.com/docs/web/setup).
 
-### Deployment
+### Install dependencies
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```sh
+yarn install
+```
 
-### `yarn build` fails to minify
+### Setup Firebase configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+In the root folder of this project, create a file named .env.development with:
+
+```
+FIREBASE_API_KEY=YOUR_API_KEY
+FIREBASE_AUTH_DOMAIN=YOUR_AUTH_DOMAIN
+FIREBASE_DATABASE_URL=YOUR_DATABASE_URL
+FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
+FIREBASE_STORAGE_BUCKET=YOUR_STORAGE_BUCKET
+FIREBASE_MESSAGING_SENDER_ID=YOUR_MESSAGING_SENDER_ID
+```
+
+### Run the app
+
+```sh
+yarn dev-server
+```
+
+### See the app
+
+Visit [http://localhost:8080](http://localhost:8080)
+
+### Comments in code
+
+Some comments in the source code are course notes and therefore might not seem necessary from a developer's point of view.
+
+### Troubleshooting
+
+#### Rendering blank page when running dev-server
+
+TL;DR: the HTML output might be of the production version, so the dev-server cannot access the correct JS source file.
+
+Re-build the development version by running:
+
+```sh
+yarn run build:dev
+```
+
+Then start the webpack-dev-server again with:
+
+```sh
+yarn dev-server
+```
+
+In this project, there are two versions of webpack configuration that produce JS files with different naming method. In order to correctly access those output files every time we build, webpack is set to automatically generate HTML files and wire them up to JS files with varying names. However, the webpack-dev-server is set to be serving outputs of the development version for the existing HTML file without generating a new one. So, it is likely to have the production version HTML be served with the development version JS file when running the dev-server, and that would therefore render nothing on the page.
+
+### Run the tests
+
+If you would like to run the tests:
+
+```sh
+yarn test
+```
+
+## Built with
+
+### Front-end
+
+* [react](https://reactjs.org/)
+* [react-router-dom](https://reacttraining.com/react-router/web/guides/philosophy)
+* [react-redux](https://redux.js.org/docs/basics/UsageWithReact.html)
+* [redux](https://redux.js.org/)
+* [redux-thunk](https://github.com/gaearon/redux-thunk#redux-thunk)
+* [react-dates](https://github.com/airbnb/react-dates#react-dates-)
+* [react-modal](https://reactcommunity.org/react-modal/)
+* [firebase](https://firebase.google.com/docs/reference/js/#firebase)
+* [normalize.css](http://nicolasgallagher.com/about-normalize-css/)
+* [moment](https://momentjs.com/)
+* [numeral](http://numeraljs.com/)
+* [babel](http://babeljs.io/)
+* [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
+* [webpack](https://webpack.js.org/concepts/)
+* [eslint](https://eslint.org/)
+* [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb#eslint-config-airbnb)
+* [uuid](https://github.com/kelektiv/node-uuid#uuid-)
+
+### Back-end
+
+* [express](https://expressjs.com/)
+
+### Platforms
+
+* [Firebase](https://firebase.google.com/)
+* [Heroku](https://www.heroku.com/)
+
+### Testing
+
+* [jest](https://facebook.github.io/jest/)
+* [enzyme](http://airbnb.io/enzyme/)
+* [redux-mock-store](http://arnaudbenard.com/redux-mock-store/)
+
+### DevTools
+
+* [Redux DevTools Extension](http://extension.remotedev.io/)
+
+## License
+
+#### [MIT](./LICENSE)
